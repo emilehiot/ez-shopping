@@ -11,7 +11,7 @@ export const Nav = styled.nav`
 
 export const Container = styled.div`
     display: flex;
-    max-width: 1440px;
+    max-width: 1760px;
     justify-content: space-between;
     align-items: center;
     margin: auto;
@@ -22,7 +22,6 @@ export const Logo = styled.p`
     font-size: 26px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
-  
     text-decoration: none;
     color: #000;
     margin: 0;

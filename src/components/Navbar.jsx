@@ -1,6 +1,17 @@
 import {Nav, Container, NavItems, NavLink, Logo, DarkModeBtn} from '../style/navbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUser } from '../redux/UserSlice';
+import { useEffect } from 'react';
 
 function Navbar() {
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
+
+    useEffect(() => {
+        dispatch(fetchUser());
+    }, [dispatch]);
+    
+    console.log(user.user.username);
     return (
         <Nav>
             <Container>
@@ -9,7 +20,7 @@ function Navbar() {
                 </NavLink>
                 <NavItems>
                     <li>
-                        <NavLink to={"/profil"}>👨 Profil (Todo : api)</NavLink>
+                        <NavLink to={"/profil"}>👨 {user.user.username}</NavLink>
                     </li>
 
                     <li>
