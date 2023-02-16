@@ -1,17 +1,11 @@
+import { useContext, useState } from 'react';
+import { profilContext } from '../context/ProfilContext';
 import {Nav, Container, NavItems, NavLink, Logo, DarkModeBtn} from '../style/navbar';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchUser } from '../redux/UserSlice';
-import { useEffect } from 'react';
 
 function Navbar() {
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
 
-    useEffect(() => {
-        dispatch(fetchUser());
-    }, [dispatch]);
+    const {firstname, lastname, showProfil} = useContext(profilContext);
     
-    console.log(user.user.username);
     return (
         <Nav>
             <Container>
@@ -20,7 +14,7 @@ function Navbar() {
                 </NavLink>
                 <NavItems>
                     <li>
-                        <NavLink to={"/profil"}>👨 {user.user.username}</NavLink>
+                        <NavLink to={"/profil"}>{showProfil ? `👨 ${firstname} ${lastname}` : "👨 Votre profil"} </NavLink>
                     </li>
 
                     <li>

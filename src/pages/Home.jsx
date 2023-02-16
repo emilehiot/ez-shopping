@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts } from '../redux/ProductsSlice';
+import { fetchProducts } from '../reducers/ProductsSlice';
 import { Grid, Container, Card } from '../style/home';
 
 function home() {
@@ -12,8 +12,6 @@ function home() {
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
-
-console.log(products);
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -44,7 +42,6 @@ console.log(products);
             </Container>
         </div>
     )
->>>>>>> refs/remotes/origin/main
 }
 
 export default home
