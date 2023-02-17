@@ -1,7 +1,8 @@
-import {Nav, Container, NavItems, NavLink, Logo, DarkModeBtn} from '../style/navbar';
+import {Nav, Container, NavItems, NavLink, Logo} from '../style/navbar';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUser } from '../redux/UserSlice';
+import { fetchUser } from '../reducers/UserSlice';
 import { useEffect } from 'react';
+import { switchTheme } from '../reducers/DarkModeSlice';
 
 function Navbar() {
     const dispatch = useDispatch();
@@ -11,7 +12,12 @@ function Navbar() {
         dispatch(fetchUser());
     }, [dispatch]);
     
-    console.log(user.user.username);
+    // console.log(user.user.username);
+
+    const handleDarkMode = () => {
+        dispatch(switchTheme(false))
+    }
+
     return (
         <Nav>
             <Container>
@@ -26,7 +32,7 @@ function Navbar() {
                     <li>
                         <NavLink to={"/card"}>🛒 0 Items (Todo : api)</NavLink>
                     </li>
-                        <DarkModeBtn href='#'>🌚 Dark mode (Todo : feat on/off)</DarkModeBtn>
+                        <button onClick={handleDarkMode} href='#'>🌚 Dark mode (Todo : feat on/off)</button>
                 </NavItems>
             </Container>
         </Nav>

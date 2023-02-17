@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts } from '../redux/ProductsSlice';
+import { fetchProducts } from '../reducers/ProductsSlice';
 import { Grid, Container, Card } from '../style/home';
 
 function home() {
@@ -34,17 +34,11 @@ console.log(products);
                                     {product.title}
                                 </div>
                             ))}
-                            {products.map(product => (
-                                <div key={product.id}>
-                                    {product.title}
-                                </div>
-                            ))}
                         </div>
                     </Grid>
             </Container>
         </div>
     )
->>>>>>> refs/remotes/origin/main
 }
 
 export default home

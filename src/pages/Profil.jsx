@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import {Inputs, Container, Btn, HomeContainer, Title, Form} from '../style/profil.jsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUser } from '../redux/UserSlice';
+import { fetchUser } from '../reducers/UserSlice';
 import { useEffect } from 'react';
 
 
@@ -28,20 +28,20 @@ function Profil() {
             <Navbar />
             <HomeContainer>
                 <Container>
-                    <Title>Hi, {user.user.username} 👋 !</Title>
+                    <Title>Hi, {user.user.name.firstname} 👋 !</Title>
                     <h3>Customize your profile</h3>
                     <Form>
                         <Inputs>
                             <label htmlFor="firstname">Your firstname: </label>
-                            <input type="text" name='firstname' id='firstname' onChange={(e) => setNewFirstname(e.target.value)}/>
+                            <input type="text" name='firstname' id='firstname' value={user.user.name.firstname} onChange={(e) => setNewFirstname(e.target.value)}/>
                         </Inputs>
                         <Inputs>
                             <label htmlFor="lastname">Your lastname: </label>
-                            <input type="text" name='lastname' id='lastname' onChange={(e) => setNewLastname(e.target.value)}/>
+                            <input type="text" name='lastname' id='lastname' value={user.user.name.lastname} onChange={(e) => setNewLastname(e.target.value)}/>
                         </Inputs>
                         <Inputs>
                             <label htmlFor="email">Your email: </label>
-                            <input type="email" name='email' id='email' onChange={(e) => setNewEmail(e.target.value)}/>
+                            <input type="email" name='email' id='email' value={user.user.email} onChange={(e) => setNewEmail(e.target.value)}/>
                         </Inputs>
                         <Btn>Save</Btn>
                     </Form>

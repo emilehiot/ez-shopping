@@ -28,7 +28,7 @@ export const Card = styled.div`
     align-items: center;
     text-align: center;
     padding: 1rem;
-    margn: 1rem;
+    margin: 1rem;
 
     border: 1px solid #eab023;
 `;

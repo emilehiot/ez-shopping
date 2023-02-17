@@ -47,4 +47,3 @@ export const DarkModeBtn = styled.a`
     text-decoration: none;
     color: #000;
 `;
-

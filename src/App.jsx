@@ -1,22 +1,31 @@
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import Profil from "./pages/Profil"
 import ShoppingCart from "./pages/ShoppingCard.jsx"
-import { createGlobalStyle } from "styled-components"
+import styled, { ThemeProvider } from 'styled-components';
+import {lightTheme, darkTheme, GlobalStyle} from "./style/themes";
+import {useSelector} from "react-redux";
 
-const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
-  }
+
+const StyledApp = styled.div`
+    
 `;
 
 function App() {
+
+    const themeDark = useSelector(state => state.darkMode.darkTheme);
+    const [theme, setTheme] = useState('light');
+    const themeToggler = () => {
+        themeDark === 'light' ? setTheme('dark') : setTheme('light');
+    };
+
+
   return (
-      <>
-          <GlobalStyle />
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <StyledApp>
+
           <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -24,7 +33,9 @@ function App() {
                 <Route path="/card" element={<ShoppingCart />} />
               </Routes>
           </BrowserRouter>
-      </>
+
+      </StyledApp>
+      </ThemeProvider>
   )
 }
 
