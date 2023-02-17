@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../reducers/ProductsSlice';
-import { Grid, Container, Card, Image, CardContainer, CardBody, CardButton, CardQuantity, CardPrice, CardCategory } from '../style/home';
+import { Container, Card, Image, CardContainer, CardBody, CardButton, CardQuantity, CardPrice, CardCategory } from '../style/home';
 import { addToCart } from '../reducers/CartSlice';
 
 function home() {
@@ -24,14 +24,14 @@ function home() {
         return <div>error</div> ;
     }
 
-    const data = {
-        id : products.id,
-        title: products.title,
-        image: products.image,
-        description: products.description,
-        price: products.price,
-        // quantity: 
-    }
+    // const data = {
+    //     id : products.id,
+    //     title: products.title,
+    //     image: products.image,
+    //     description: products.description,
+    //     price: products.price,
+    //     // quantity: 
+    // }
 
     function handleAddToCart(product) {
         // dispatch(addToCart(product.image, product.title, product.description, product.price));
