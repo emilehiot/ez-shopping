@@ -1,29 +1,38 @@
-import { useState } from "react"
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import Profil from "./pages/Profil"
 import ShoppingCart from "./pages/ShoppingCard.jsx"
+import styled, { ThemeProvider } from 'styled-components';
+import {lightTheme, darkTheme, GlobalStyle} from "./style/themes";
+import {useSelector} from "react-redux";
 import { createGlobalStyle } from "styled-components"
-import { profilContext } from "./context/ProfilContext"
+import { profilContext } from "./context/ProfilContext";
 
-const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
-  }
+
+const StyledApp = styled.div`
+    
 `;
 
 function App() {
-  const [firstname, setFirstname] = useState("John");
-  const [lastname, setLastname] = useState("Doe");
-  const [email, setEmail] = useState("test@mail.com");
-  const [showProfil, setShowProfil] = useState(false);
+
+    const themeDark = useSelector(state => state.darkMode.darkTheme);
+    const [theme, setTheme] = useState('light');
+    const themeToggler = () => {
+        themeDark === 'light' ? setTheme('dark') : setTheme('light');
+    };
+
+    const [firstname, setFirstname] = useState("John");
+    const [lastname, setLastname] = useState("Doe");
+    const [email, setEmail] = useState("test@mail.com");
+    const [showProfil, setShowProfil] = useState(false);
 
   return (
       <>
-        <profilContext.Provider value={{firstname, setFirstname, showProfil, setShowProfil, lastname, setLastname, email, setEmail}}>
+          <profilContext.Provider value={{firstname, setFirstname, showProfil, setShowProfil, lastname, setLastname, email, setEmail}}>
+          <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+          <GlobalStyle />
+          <StyledApp>
           <GlobalStyle />
           <BrowserRouter>
               <Routes>
@@ -32,7 +41,9 @@ function App() {
                 <Route path="/card" element={<ShoppingCart />} />
               </Routes>
           </BrowserRouter>
-        </profilContext.Provider>
+          </StyledApp>
+          </ThemeProvider>
+          </profilContext.Provider>
       </>
   )
 }

@@ -24,7 +24,7 @@ export const CardContainer = styled.div`
 export const Card = styled.div`
     display: flex;
     gap: 32px;
-    width: 45%;
+    width: 40%;
 `;
 
 export const Image =  styled.img`
@@ -37,7 +37,6 @@ export const CardBody = styled.div`
     width: 45%;
     display: flex;
     flex-direction: column;
-    gap: 24px;
 `;
 
 export const CardCategory = styled.span`
