@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import Navbar from '../components/Navbar';
 import {Inputs, Container, Btn, HomeContainer, Title, Form} from '../style/profil.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUser } from '../reducers/UserSlice';
 import { useEffect } from 'react';
-
-
+import { profilContext } from '../context/ProfilContext';
 
 function Profil() {
+
+    const {firstname, setFirstname, lastname, setLastname, email, setEmail, setShowProfil, showProfil } = useContext(profilContext);
+
     const [newFirstname, setNewFirstname] = useState("");
     const [newLastname, setNewLastname] = useState("");
     const [newEmail, setNewEmail] = useState("");
+    
 
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
 
-    useEffect(() => {
-        dispatch(fetchUser());
-    }, [dispatch]);
-
-    function handleSubmit() {
-
+    function handleSubmit(e) {
+        e.preventDefault();
+        setShowProfil(true);
+        setFirstname(newFirstname);
+        setLastname(newLastname);
+        setEmail(newEmail)
+        console.log()
     }
 
     return (
@@ -28,20 +30,20 @@ function Profil() {
             <Navbar />
             <HomeContainer>
                 <Container>
-                    <Title>Hi, {user.user.name.firstname} 👋 !</Title>
+                    <Title> {showProfil ? `Hi, ${firstname} ${lastname} 👋!` : "Hi 👋! " } </Title>
                     <h3>Customize your profile</h3>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Inputs>
                             <label htmlFor="firstname">Your firstname: </label>
-                            <input type="text" name='firstname' id='firstname' value={user.user.name.firstname} onChange={(e) => setNewFirstname(e.target.value)}/>
+                            <input type="text" name='firstname' id='firstname' onChange={(e) => setNewFirstname(e.target.value)} value={newFirstname} placeholder={firstname}/>
                         </Inputs>
                         <Inputs>
                             <label htmlFor="lastname">Your lastname: </label>
-                            <input type="text" name='lastname' id='lastname' value={user.user.name.lastname} onChange={(e) => setNewLastname(e.target.value)}/>
+                            <input type="text" name='lastname' id='lastname' onChange={(e) => setNewLastname(e.target.value)} value={newLastname} placeholder={lastname}/>
                         </Inputs>
                         <Inputs>
                             <label htmlFor="email">Your email: </label>
-                            <input type="email" name='email' id='email' value={user.user.email} onChange={(e) => setNewEmail(e.target.value)}/>
+                            <input type="email" name='email' id='email' onChange={(e) => setNewEmail(e.target.value)} value={newEmail} placeholder={email}/>
                         </Inputs>
                         <Btn>Save</Btn>
                     </Form>

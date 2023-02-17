@@ -6,6 +6,8 @@ import ShoppingCart from "./pages/ShoppingCard.jsx"
 import styled, { ThemeProvider } from 'styled-components';
 import {lightTheme, darkTheme, GlobalStyle} from "./style/themes";
 import {useSelector} from "react-redux";
+import { createGlobalStyle } from "styled-components"
+import { profilContext } from "./context/ProfilContext";
 
 
 const StyledApp = styled.div`
@@ -20,12 +22,18 @@ function App() {
         themeDark === 'light' ? setTheme('dark') : setTheme('light');
     };
 
+    const [firstname, setFirstname] = useState("John");
+    const [lastname, setLastname] = useState("Doe");
+    const [email, setEmail] = useState("test@mail.com");
+    const [showProfil, setShowProfil] = useState(false);
 
   return (
-      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <GlobalStyle />
-      <StyledApp>
-
+      <>
+          <profilContext.Provider value={{firstname, setFirstname, showProfil, setShowProfil, lastname, setLastname, email, setEmail}}>
+          <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+          <GlobalStyle />
+          <StyledApp>
+          <GlobalStyle />
           <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -33,9 +41,10 @@ function App() {
                 <Route path="/card" element={<ShoppingCart />} />
               </Routes>
           </BrowserRouter>
-
-      </StyledApp>
-      </ThemeProvider>
+          </StyledApp>
+          </ThemeProvider>
+          </profilContext.Provider>
+      </>
   )
 }
 

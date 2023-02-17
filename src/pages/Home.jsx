@@ -13,8 +13,6 @@ function home() {
         dispatch(fetchProducts());
     }, [dispatch]);
 
-console.log(products);
-
     if (isLoading) {
         return <div>Loading...</div>;
     }
