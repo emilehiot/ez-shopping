@@ -18,6 +18,7 @@ function App() {
 
     const themeDark = useSelector(state => state.darkMode.darkTheme);
     const [theme, setTheme] = useState('light');
+
     const themeToggler = () => {
         themeDark === 'light' ? setTheme('dark') : setTheme('light');
     };
@@ -30,7 +31,7 @@ function App() {
   return (
       <>
           <profilContext.Provider value={{firstname, setFirstname, showProfil, setShowProfil, lastname, setLastname, email, setEmail}}>
-          <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+          <ThemeProvider theme={themeDark === "light" ? lightTheme : darkTheme}>
           <GlobalStyle />
           <StyledApp>
           <GlobalStyle />

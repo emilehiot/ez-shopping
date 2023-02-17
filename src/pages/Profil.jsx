@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import Navbar from '../components/Navbar';
 import {Inputs, Container, Btn, HomeContainer, Title, Form} from '../style/profil.jsx';
-import { useSelector, useDispatch } from 'react-redux';
 import { profilContext } from '../context/ProfilContext';
 
 function Profil() {

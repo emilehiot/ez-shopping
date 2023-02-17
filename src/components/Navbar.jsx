@@ -6,11 +6,20 @@ import { useContext, useState } from 'react';
 import { profilContext } from '../context/ProfilContext';
 
 function Navbar() {
+    const [darkMode, setDarkMode] = useState("dark");
+
+    const dispatch = useDispatch();
 
     const {firstname, lastname, showProfil} = useContext(profilContext);
     // console.log(user.user.username);
     const handleDarkMode = () => {
-        dispatch(switchTheme(false))
+        if(darkMode === "light") {
+            setDarkMode("dark");
+            dispatch(switchTheme(darkMode))
+        } else {
+            setDarkMode("light");
+            dispatch(switchTheme(darkMode));
+        }
     }
 
     return (
